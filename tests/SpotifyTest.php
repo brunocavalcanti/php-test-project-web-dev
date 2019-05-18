@@ -35,7 +35,18 @@ class TestesEmail extends TestCase
 
     protected function setUp(): void
     {
-        $this->navegador = RemoteWebDriver::create('http://localhost:4444', DesiredCapabilities::chrome());
+        $browserStack = 'http://ewertonkaminski1:iD2z35qhqEgJwtNg8ERp@hub-cloud.browserstack.com/wd/hub';
+        $this
+            ->navegador = RemoteWebDriver::create($browserStack, array(
+                "browser" => "Chrome",
+                "browser_version" => "74.0",
+                "os" => "Windows",
+                "os_version" => "10",
+                "resolution" => "1024x768"
+            ));
+
+
+        //$this->navegador = RemoteWebDriver::create('http://localhost:4444', DesiredCapabilities::chrome());
         $this->navegador->get('https://accounts.spotify.com/pt-BR/login/?continue=https:%2F%2Fwww.spotify.com%2Fbr%2Faccount%2Foverview%2F&_locale=pt-BR');
         $this->navegador->manage()->window()->maximize();
         $this->navegador->manage()->timeouts()->implicitlyWait(2);
